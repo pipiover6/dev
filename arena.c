@@ -55,10 +55,10 @@ void arena_test()
     char s3[40] = "dogs";
     char s4[40] = "dogs world";
     struct arena_s* arena_p = arena_create(100);
-    arena_write(arena_p, 0, strlen(s1) + 1, s1);
-    arena_read(s2, arena_p, 0, strlen(s1) + 1);
+    arena_write(arena_p, 0, strlen(s1) + 1, (byte*)s1);
+    arena_read((byte*)s2, arena_p, 0, strlen(s1) + 1);
     assert(strcmp(s1, s2) == 0);
-    arena_read(s3 + strlen(s3), arena_p, 5, strlen(s1) + 1 - 5);
+    arena_read((byte*)(s3) + strlen(s3), arena_p, 5, strlen(s1) + 1 - 5);
     assert(strcmp(s3, s4) == 0);
     arena_destroy(arena_p);
     printf("arena_test passed\n");

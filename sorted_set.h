@@ -45,3 +45,5 @@ void walk_in_order(struct sorted_set_s* sorted_set_p, void (*fnc)(byte*));
 
 // apply a function to each of element in the sorted set, from max to min
 void walk_in_reverse(struct sorted_set_s* sorted_set_p, void (*fnc)(byte*));
+
+void sorted_set_test();
