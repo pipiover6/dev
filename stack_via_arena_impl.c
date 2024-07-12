@@ -58,7 +58,7 @@ void stack_push(struct stack_s* stack_p, byte* src)
 void stack_test()
 {
     u64 arr[5] = {0, 1, 2, 3, 4};
-    u64 cur = -1;
+    u64 cur = UINT64_MAX;
     struct stack_s* stack_p = stack_create(sizeof(u64)); // []
     assert(0 == stack_num_elmnts(stack_p));
     STACK_PUSH(stack_p, arr[0]); // [0]

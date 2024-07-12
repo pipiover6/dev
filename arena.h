@@ -22,4 +22,4 @@ void arena_write(struct arena_s* arena_p, u64 starting_byte_index, u64 num_bytes
 void arena_ensure_space(struct arena_s* arena_p, u64 num_bytes);
 
 // implementation test
-void arena_test();
+void arena_test(void);

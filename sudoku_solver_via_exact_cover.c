@@ -1,4 +1,5 @@
 #include "exact_cover.h"
+#include "sudoku_solver.h"
 
 // building block for the exact cover matrix
 static void sudoku_ecm_helper(bool* ecm, u32 s_col, u32 s_row, u32 s_idx, u32 s_box, u32 s_val)
@@ -89,7 +90,7 @@ bool solve_sudoku(u32* sudoku_puzzle, u32* sudoku_solution)
     return find_exact_covers(exact_cover_mat, 9 * 9 * 9, 4 * 9 * 9, 1, sudoku_cb, (byte*) sudoku_solution);
 }
 
-void sudoku_test()
+void sudoku_test(void)
 {
     u32 puzzle[81] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0,

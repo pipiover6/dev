@@ -28,4 +28,4 @@ void stack_push(struct stack_s* stack_p, byte* src);
 #define STACK_PUSH(stack_p, x) (stack_push(stack_p, (byte*)(&(x))))
 
 // implementation test
-void stack_test();
+void stack_test(void);

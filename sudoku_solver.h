@@ -5,4 +5,4 @@
 // we return the first solution we find (if any)
 bool solve_sudoku(u32* sudoku_puzzle, u32* sudoku_solution);
 
-void sudoku_test();
+void sudoku_test(void);

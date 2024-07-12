@@ -44,7 +44,7 @@ static void walk(struct binary_node_struct* node_p, bool dir, void (*fnc)(byte*)
         return;
     walk(node_p->child[dir], dir, fnc);
     fnc(binary_node_get_element(node_p));
-    walk(node_p->child[1-dir], dir, fnc);
+    walk(node_p->child[1 - dir], dir, fnc);
 }
 
 static void update_size(struct binary_node_struct* node_p)
@@ -63,10 +63,10 @@ static void update_size(struct binary_node_struct* node_p)
 */
 static struct binary_node_struct* rotation(struct binary_node_struct* y, bool dir)
 {
-    struct binary_node_struct* x = y->child[1-dir];
+    struct binary_node_struct* x = y->child[1 - dir];
     u32 temp = y->size;
     assert(y != NIL); assert(x != NIL);
-    y->child[1-dir] = x->child[dir];
+    y->child[1 - dir] = x->child[dir];
     x->child[dir] = y;
     update_size(y); update_size(x);
     assert(x->size == temp);
@@ -85,13 +85,13 @@ static struct binary_node_struct* rotation(struct binary_node_struct* y, bool di
 */
 static struct binary_node_struct* double_rotation(struct binary_node_struct* z, bool dir)
 {
-    struct binary_node_struct* y = z->child[1-dir];
+    struct binary_node_struct* y = z->child[1 - dir];
     struct binary_node_struct* x = y->child[dir];
     u32 temp = z->size;
     assert(z != NIL); assert(y != NIL); assert(x != NIL);
-    y->child[dir] = x->child[1-dir];
-    x->child[1-dir] = y;
-    z->child[1-dir] = x->child[dir]; 
+    y->child[dir] = x->child[1 - dir];
+    x->child[1 - dir] = y;
+    z->child[1 - dir] = x->child[dir]; 
     x->child[dir] = z;
     update_size(z); update_size(y); update_size(x);
     assert(x->size == temp);
@@ -103,7 +103,7 @@ static bool node_imbalanced(struct binary_node_struct* node_p, u32 n1, u32 n2, b
 {
     assert(node_p != NIL);
     assert(0 < MIN(n1, n2));
-    return n1 * (node_p->child[1-dir]->size + 1) < n2 * (node_p->child[dir]->size + 1);
+    return n1 * (node_p->child[1 - dir]->size + 1) < n2 * (node_p->child[dir]->size + 1);
 }
 
 // each node in the tree has one owner (the address where we store the pointer to the node)
@@ -118,9 +118,9 @@ static void node_rebalance(struct binary_node_struct* node_p, struct binary_node
         if(node_imbalanced(node_p, 5, 2, dir))
         {
             if(node_imbalanced(node_p->child[dir], 2, 3, dir))
-                *owner = rotation(node_p, 1-dir);
+                *owner = rotation(node_p, 1 - dir);
             else
-                *owner = double_rotation(node_p, 1-dir);
+                *owner = double_rotation(node_p, 1 - dir);
             return;
         }
     }
@@ -380,17 +380,17 @@ void walk_in_reverse(struct sorted_set_s* sorted_set_p, void (*fnc)(byte*))
 
 // ******* 3) test *******
 
-bool is_match_u64(byte* a, byte* b)
+static bool is_match_u64(byte* a, byte* b)
 {
     return *((u64*) a) == *((u64*) b);
 }
 
-bool is_less_u64(byte* a, byte* b)
+static bool is_less_u64(byte* a, byte* b)
 {
     return *((u64*) a) < *((u64*) b);
 }
 
-void pre_order_u64_helper(struct binary_node_struct* node_p, struct stack_s* elm_stack_p, struct stack_s* tree_size_stack_p)
+static void pre_order_u64_helper(struct binary_node_struct* node_p, struct stack_s* elm_stack_p, struct stack_s* tree_size_stack_p)
 {
     if(node_p == NIL)
         return;
@@ -401,7 +401,7 @@ void pre_order_u64_helper(struct binary_node_struct* node_p, struct stack_s* elm
     pre_order_u64_helper(node_p->child[1], elm_stack_p, tree_size_stack_p);
 }
 
-void pre_order_u64(struct sorted_set_s* sorted_set_p, struct stack_s* elm_stack_p, struct stack_s* tree_size_stack_p)
+static void pre_order_u64(struct sorted_set_s* sorted_set_p, struct stack_s* elm_stack_p, struct stack_s* tree_size_stack_p)
 {
     pre_order_u64_helper(sorted_set_p->root_p, elm_stack_p, tree_size_stack_p);
 }
